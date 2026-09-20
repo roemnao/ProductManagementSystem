@@ -1,0 +1,7 @@
+/* test case
+2
+1 Apple Fruit 10
+2 Banana Fruit 20
+Mango
+5 Fruit
+*/
