@@ -33,18 +33,7 @@ void Update(Item _list[], char _name[], int QuantityChange) {
     }
 }
 
-void FindItem(Item _list[], char _name[]) {
-	int saw = 0;
-    for (int i = 0; i < NumofType; i++) {
-        if (strcmp(_list[i].Name, _name) == 0) {
-            printf("%d %s %s %d\n", _list[i].ID, _list[i].Name, _list[i].Type, _list[i].Quantity);
-            saw = 1;
-        }
-    }
-    if(saw == 0){
-    	printf("Not see\n");
-	}
-}
+
 void Alarm(){
 	
 }
