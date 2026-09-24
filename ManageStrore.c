@@ -115,7 +115,7 @@ void importData(Item list[]) {
 }
 
 int main() {
-    Item list[100];
+    Item list[5000];
 
     importData(list);
 
