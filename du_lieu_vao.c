@@ -38,4 +38,15 @@ void importData(Product list[], int *n) {
         (*n)++;
     }
     printf(""); 
+
+    FILE *f = fopen("kho_hang.txt", "w");
+    if (f != NULL) {
+        for (int i = 0; i < *n; i++) {
+            fprintf(f, "%s|%s|%d|%.2f\n", list[i].id, list[i].name, list[i].quantity, list[i].price);
+        }
+        fclose(f);
+        printf(""); 
+    } else {
+        printf(""); 
+    }
 }
