@@ -9,14 +9,26 @@ typedef struct {
     float price;
 } Product;
 
-void exportData(Product list[], int n) {
-    if (n == 0) {
+void exportData(Product list[], int *n) {
+    *n = 0;
+    FILE *fReadManual = fopen("kho_hang.txt", "r");
+    if (fReadManual == NULL) {
+        printf(""); 
+        return;
+    }
+    while (fscanf(fReadManual, " %[^|]| %[^|]| %d| %f\n", list[*n].id, list[*n].name, &list[*n].quantity, &list[*n].price) == 4) {
+        (*n)++;
+        if (*n >= 100) break;
+    }
+    fclose(fReadManual);
+
+    if (*n == 0) {
         printf(""); 
     } else {
         printf(""); 
         printf("", "", "", "", "", ""); 
         printf(""); 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < *n; i++) {
             float total = list[i].quantity * list[i].price;
             printf("", list[i].id, list[i].name, list[i].quantity, list[i].price, total);
         }
