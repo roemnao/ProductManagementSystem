@@ -43,7 +43,7 @@ void deleteItem(Item list[], int id) {
             list[i] = list[i + 1];
         }
         numOfType--;
-        printf("Da xoá mat hang co ID %d thanh cong.", id);
+        printf("Da xoa mat hang co ID %d thanh cong.", id);
     } else {
         printf("Khong tim thay mat hang co ID %d de xoá.", id);
     }
@@ -103,39 +103,40 @@ void alarm(Item list[]) {
         printf("Khong co mat hang nao duoi so luong 5.\n");
     }
 }
+void printAllItem(Item list[], int numOfType){
+	char butter[10000];
+	printf("   ID   |             Name             |   Category    |Quantity\n");
+	for(int i = 0; i < numOfType; i++){
+		sprintf(butter,"%8d|%30s|%15s|%5d", list[i].id, list[i].name, list[i].type, list[i].quantity);
+		printf("%s\n",butter);
+	}
+}
 
-void importData(Item list[]) {
-    printf("Nhap so luong loai mat hang: ");
-    scanf("%d", &numOfType);
+int importFromFile(Item list[], char fileName[]){
+	FILE *f = fopen(fileName,"r");
+	int numOfFileItem;
+	fscanf(f,"%d", &numOfFileItem);
+	
+	for(int i = 0; i < numOfFileItem; i++){
+			fscanf(f,"%d|%[^|]|%[^|]|%d", &list[i].id, list[i].name, list[i].type, &list[i].quantity);
+	}
+	fclose(f);
+	return numOfFileItem;
+}
 
-    for (int i = 0; i < numOfType; i++) {
-        printf("Nhap ID, Ten, Loai hang, So luong (cho item %d): ", i + 1);
-        scanf("%d %100s %100s %d", &list[i].id, list[i].name, list[i].type, &list[i].quantity);
-    }
+void exportToFile(Item list[], char fileName[], int numOfFileItem){
+	FILE *f = fopen(fileName,"w");
+	fprintf(f,"%d\n", numOfFileItem);
+	
+	for(int i = 0; i < numOfFileItem; i++){
+			fprintf(f,"%d|%s|%s|%d\n", list[i].id, list[i].name, list[i].type, list[i].quantity);
+	}
+	fclose(f);
 }
 
 int main() {
     Item list[5000];
-
-    importData(list);
-
-    char testName[101];
-    printf("\nNhap ten mat hang can tim: ");
-    scanf("%100s", testName);
-
-    findItem(list, testName);
-
-    printf("\n--- Cap nhat so luong ---\n");
-    updateQuantity(list, 1, 10);
-
-    printf("\n");
-    alarm(list);
-
-    printf("\n--- Cap nhat thong tin mat hang ---\n");
-    updateStore(list, 1);
-
-    printf("\n--- Xoa mat hang ---\n");
-    deleteItem(list, 1);
-
+	int numOfType = importFromFile(list,"DATA.txt");	
+	printAllItem(list,numOfType);
     return 0;
 }
