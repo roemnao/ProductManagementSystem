@@ -140,5 +140,6 @@ int main() {
 	printAllItem(list,numOfType);
 	findItem(list,"Sunscreen_SPF50");
 	updateQuantity()
+
     return 0;
 }
