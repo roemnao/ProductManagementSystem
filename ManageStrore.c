@@ -139,7 +139,5 @@ int main() {
 	int numOfType = importFromFile(list,"DATA.txt");	
 	printAllItem(list,numOfType);
 	findItem(list,"Sunscreen_SPF50");
-	updateQuantity()
-
     return 0;
 }
